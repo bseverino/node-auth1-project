@@ -10,11 +10,30 @@ router.post('/register', (req, res) => {
 
     Users.add(user)
         .then(saved => {
-            res.status(201).json(saved)
+            console.log(saved)
+            res.status(201).json({ message: 'User successfully created.' })
         })
         .catch(err => {
             console.log(err)
             res.status(500).json({ message: 'Error creating user.' })
+        })
+})
+
+router.post('/login', (req, res) => {
+    const { username, password } = req.body
+
+    Users.findBy({ username })
+        .first()
+        .then(user => {
+            if (user && bc.compareSync(password, user.password)) {
+                res.status(200).json({ message: `Welcome ${user.username}!` })
+            } else {
+                res.status(401).json({ message: 'Invalid credentials.' })
+            }
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({ message: 'Error validating user.' })
         })
 })
 

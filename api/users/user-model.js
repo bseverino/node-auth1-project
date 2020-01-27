@@ -17,7 +17,6 @@ function find() {
 }
 
 function findBy(filter) {
-    return db('user')
+    return db('user')        
         .where(filter)
-        .first()
 }
