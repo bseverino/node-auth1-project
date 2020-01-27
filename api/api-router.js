@@ -4,6 +4,6 @@ const authRouter = require('./auth/auth-router.js')
 const userRouter = require('./users/user-router.js')
 
 router.use('/', authRouter)
-router.use('/users', userRouter)
+// router.use('/users', userRouter)
 
 module.exports = router
