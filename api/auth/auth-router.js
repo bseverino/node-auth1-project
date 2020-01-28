@@ -26,6 +26,7 @@ router.post('/login', (req, res) => {
         .first()
         .then(user => {
             if (user && bc.compareSync(password, user.password)) {
+                req.session.logged_in = true
                 res.status(200).json({ message: `Welcome ${user.username}!` })
             } else {
                 res.status(401).json({ message: 'Invalid credentials.' })
